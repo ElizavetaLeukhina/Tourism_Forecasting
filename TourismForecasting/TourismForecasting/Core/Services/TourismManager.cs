@@ -41,25 +41,28 @@ namespace TourismForecastingApp.Core.Services
                 .ToList();
         }
 
-        // Возвращает название страны с наибольшим суммарным числом туристов.
-        public static string GetCountryWithMaxTourists()
+        // Возвращает страну с наибольшим числом туристов и количество туристов.
+        public static (string Country, int TotalTourists) GetCountryWithMaxTourists()
         {
             return _records
                 .GroupBy(r => r.Country)
-                .OrderByDescending(g => g.Sum(r => r.Tourists))
-                .First()
-                .Key;
+                .Select(g => new { Country = g.Key, Total = g.Sum(r => r.Tourists) })
+                .OrderByDescending(g => g.Total)
+                .Select(g => (g.Country, g.Total))
+                .First();
         }
 
-        // Возвращает название страны с наименьшим суммарным числом туристов.
-        public static string GetCountryWithMinTourists()
+        // Возвращает страну с наименьшим числом туристов и количество туристов.
+        public static (string Country, int TotalTourists) GetCountryWithMinTourists()
         {
             return _records
                 .GroupBy(r => r.Country)
-                .OrderBy(g => g.Sum(r => r.Tourists))
-                .First()
-                .Key;
+                .Select(g => new { Country = g.Key, Total = g.Sum(r => r.Tourists) })
+                .OrderBy(g => g.Total)
+                .Select(g => (g.Country, g.Total))
+                .First();
         }
+
 
         // Выполняет прогнозирование методом скользящей средней на N лет.
         public static List<TourismRecord> ForecastByMovingAverage(string country, int yearsToForecast, int window = 3)
