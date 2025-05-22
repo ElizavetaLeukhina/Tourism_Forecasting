@@ -67,5 +67,37 @@ namespace TourismForecasting
                 }
             }
         }
+
+        private void btnPlotGraph_Click(object sender, EventArgs e)
+        {
+            if (cbCountrySelector.SelectedItem == null)
+            {
+                MessageBox.Show("Пожалуйста, выберите страну.");
+                return;
+            }
+
+            string selectedCountry = cbCountrySelector.SelectedItem.ToString();
+            var records = TourismManager.GetRecordsByCountry(selectedCountry);
+
+            // Обновляем таблицу
+            dgvTourismData.DataSource = records;
+
+            // Строим график
+            chartTourism.Series.Clear();
+            var series = new System.Windows.Forms.DataVisualization.Charting.Series
+            {
+                Name = "Tourists",
+                ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line,
+                BorderWidth = 3
+            };
+
+            foreach (var record in records)
+            {
+                series.Points.AddXY(record.Year, record.Tourists);
+            }
+
+            chartTourism.Series.Add(series);
+            chartTourism.ChartAreas[0].RecalculateAxesScale();
+        }
     }
 }

@@ -32,6 +32,7 @@
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             panel1 = new Panel();
+            btnPlotGraph = new Button();
             chartTourism = new System.Windows.Forms.DataVisualization.Charting.Chart();
             dgvTourismData = new DataGridView();
             cbCountrySelector = new ComboBox();
@@ -47,6 +48,7 @@
             // panel1
             // 
             panel1.BackColor = Color.Olive;
+            panel1.Controls.Add(btnPlotGraph);
             panel1.Controls.Add(chartTourism);
             panel1.Controls.Add(dgvTourismData);
             panel1.Controls.Add(cbCountrySelector);
@@ -59,42 +61,52 @@
             panel1.Size = new Size(1829, 897);
             panel1.TabIndex = 0;
             // 
+            // btnPlotGraph
+            // 
+            btnPlotGraph.Location = new Point(636, 111);
+            btnPlotGraph.Name = "btnPlotGraph";
+            btnPlotGraph.Size = new Size(433, 46);
+            btnPlotGraph.TabIndex = 7;
+            btnPlotGraph.Text = "Загрузка данных по стране";
+            btnPlotGraph.UseVisualStyleBackColor = true;
+            btnPlotGraph.Click += btnPlotGraph_Click;
+            // 
             // chartTourism
             // 
             chartArea1.Name = "ChartArea1";
             chartTourism.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
             chartTourism.Legends.Add(legend1);
-            chartTourism.Location = new Point(64, 225);
+            chartTourism.Location = new Point(916, 188);
             chartTourism.Name = "chartTourism";
             series1.ChartArea = "ChartArea1";
             series1.Legend = "Legend1";
             series1.Name = "Series1";
             chartTourism.Series.Add(series1);
-            chartTourism.Size = new Size(600, 600);
+            chartTourism.Size = new Size(875, 588);
             chartTourism.TabIndex = 6;
             chartTourism.Text = "chart1";
             // 
             // dgvTourismData
             // 
             dgvTourismData.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvTourismData.Location = new Point(1257, 147);
+            dgvTourismData.Location = new Point(51, 188);
             dgvTourismData.Name = "dgvTourismData";
             dgvTourismData.RowHeadersWidth = 82;
-            dgvTourismData.Size = new Size(480, 300);
+            dgvTourismData.Size = new Size(757, 521);
             dgvTourismData.TabIndex = 5;
             // 
             // cbCountrySelector
             // 
             cbCountrySelector.FormattingEnabled = true;
-            cbCountrySelector.Location = new Point(522, 99);
+            cbCountrySelector.Location = new Point(713, 65);
             cbCountrySelector.Name = "cbCountrySelector";
             cbCountrySelector.Size = new Size(242, 40);
             cbCountrySelector.TabIndex = 4;
             // 
             // btnLoadData
             // 
-            btnLoadData.Location = new Point(743, 442);
+            btnLoadData.Location = new Point(161, 730);
             btnLoadData.Name = "btnLoadData";
             btnLoadData.Size = new Size(338, 46);
             btnLoadData.TabIndex = 3;
@@ -115,7 +127,7 @@
             // lblMinCountry
             // 
             lblMinCountry.AutoSize = true;
-            lblMinCountry.Location = new Point(1243, 523);
+            lblMinCountry.Location = new Point(798, 765);
             lblMinCountry.Name = "lblMinCountry";
             lblMinCountry.Size = new Size(55, 32);
             lblMinCountry.TabIndex = 1;
@@ -125,7 +137,7 @@
             // lblMaxCountry
             // 
             lblMaxCountry.AutoSize = true;
-            lblMaxCountry.Location = new Point(852, 500);
+            lblMaxCountry.Location = new Point(656, 765);
             lblMaxCountry.Name = "lblMaxCountry";
             lblMaxCountry.Size = new Size(58, 32);
             lblMaxCountry.TabIndex = 0;
@@ -159,5 +171,6 @@
         private DataGridView dgvTourismData;
         private ComboBox cbCountrySelector;
         private System.Windows.Forms.DataVisualization.Charting.Chart chartTourism;
+        private Button btnPlotGraph;
     }
 }
