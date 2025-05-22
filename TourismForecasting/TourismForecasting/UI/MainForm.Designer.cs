@@ -28,10 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             panel1 = new Panel();
+            txtYearsToForecast = new TextBox();
+            BtnForecast = new Button();
+            btnAnalyze = new Button();
             btnPlotGraph = new Button();
             chartTourism = new System.Windows.Forms.DataVisualization.Charting.Chart();
             dgvTourismData = new DataGridView();
@@ -40,7 +43,6 @@
             label3 = new Label();
             lblMinCountry = new Label();
             lblMaxCountry = new Label();
-            btnAnalyze = new Button();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)chartTourism).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvTourismData).BeginInit();
@@ -49,6 +51,8 @@
             // panel1
             // 
             panel1.BackColor = Color.Olive;
+            panel1.Controls.Add(txtYearsToForecast);
+            panel1.Controls.Add(BtnForecast);
             panel1.Controls.Add(btnAnalyze);
             panel1.Controls.Add(btnPlotGraph);
             panel1.Controls.Add(chartTourism);
@@ -63,6 +67,33 @@
             panel1.Size = new Size(1829, 1153);
             panel1.TabIndex = 0;
             // 
+            // txtYearsToForecast
+            // 
+            txtYearsToForecast.Location = new Point(1007, 965);
+            txtYearsToForecast.Name = "txtYearsToForecast";
+            txtYearsToForecast.Size = new Size(200, 39);
+            txtYearsToForecast.TabIndex = 11;
+            // 
+            // BtnForecast
+            // 
+            BtnForecast.Location = new Point(1288, 878);
+            BtnForecast.Name = "BtnForecast";
+            BtnForecast.Size = new Size(150, 46);
+            BtnForecast.TabIndex = 9;
+            BtnForecast.Text = "button1";
+            BtnForecast.UseVisualStyleBackColor = true;
+            BtnForecast.Click += BtnForecast_Click;
+            // 
+            // btnAnalyze
+            // 
+            btnAnalyze.Location = new Point(93, 864);
+            btnAnalyze.Name = "btnAnalyze";
+            btnAnalyze.Size = new Size(150, 46);
+            btnAnalyze.TabIndex = 8;
+            btnAnalyze.Text = "Анализ";
+            btnAnalyze.UseVisualStyleBackColor = true;
+            btnAnalyze.Click += btnAnalyze_Click;
+            // 
             // btnPlotGraph
             // 
             btnPlotGraph.Location = new Point(636, 111);
@@ -75,16 +106,16 @@
             // 
             // chartTourism
             // 
-            chartArea1.Name = "ChartArea1";
-            chartTourism.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            chartTourism.Legends.Add(legend1);
+            chartArea3.Name = "ChartArea1";
+            chartTourism.ChartAreas.Add(chartArea3);
+            legend3.Name = "Legend1";
+            chartTourism.Legends.Add(legend3);
             chartTourism.Location = new Point(916, 188);
             chartTourism.Name = "chartTourism";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            chartTourism.Series.Add(series1);
+            series3.ChartArea = "ChartArea1";
+            series3.Legend = "Legend1";
+            series3.Name = "Series1";
+            chartTourism.Series.Add(series3);
             chartTourism.Size = new Size(875, 657);
             chartTourism.TabIndex = 6;
             chartTourism.Text = "chart1";
@@ -129,7 +160,7 @@
             // lblMinCountry
             // 
             lblMinCountry.AutoSize = true;
-            lblMinCountry.Location = new Point(955, 871);
+            lblMinCountry.Location = new Point(279, 878);
             lblMinCountry.Name = "lblMinCountry";
             lblMinCountry.Size = new Size(55, 32);
             lblMinCountry.TabIndex = 1;
@@ -139,22 +170,12 @@
             // lblMaxCountry
             // 
             lblMaxCountry.AutoSize = true;
-            lblMaxCountry.Location = new Point(713, 871);
+            lblMaxCountry.Location = new Point(279, 834);
             lblMaxCountry.Name = "lblMaxCountry";
             lblMaxCountry.Size = new Size(58, 32);
             lblMaxCountry.TabIndex = 0;
             lblMaxCountry.Text = "max";
             lblMaxCountry.Click += label1_Click;
-            // 
-            // btnAnalyze
-            // 
-            btnAnalyze.Location = new Point(581, 959);
-            btnAnalyze.Name = "btnAnalyze";
-            btnAnalyze.Size = new Size(150, 46);
-            btnAnalyze.TabIndex = 8;
-            btnAnalyze.Text = "Анализ";
-            btnAnalyze.UseVisualStyleBackColor = true;
-            btnAnalyze.Click += btnAnalyze_Click;
             // 
             // MainForm
             // 
@@ -185,5 +206,7 @@
         private System.Windows.Forms.DataVisualization.Charting.Chart chartTourism;
         private Button btnPlotGraph;
         private Button btnAnalyze;
+        private Button BtnForecast;
+        private TextBox txtYearsToForecast;
     }
 }
