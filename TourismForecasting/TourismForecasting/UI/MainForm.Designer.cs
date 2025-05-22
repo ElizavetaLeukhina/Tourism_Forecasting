@@ -40,6 +40,7 @@
             label3 = new Label();
             lblMinCountry = new Label();
             lblMaxCountry = new Label();
+            btnAnalyze = new Button();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)chartTourism).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvTourismData).BeginInit();
@@ -48,6 +49,7 @@
             // panel1
             // 
             panel1.BackColor = Color.Olive;
+            panel1.Controls.Add(btnAnalyze);
             panel1.Controls.Add(btnPlotGraph);
             panel1.Controls.Add(chartTourism);
             panel1.Controls.Add(dgvTourismData);
@@ -58,7 +60,7 @@
             panel1.Controls.Add(lblMaxCountry);
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1829, 897);
+            panel1.Size = new Size(1829, 1153);
             panel1.TabIndex = 0;
             // 
             // btnPlotGraph
@@ -83,7 +85,7 @@
             series1.Legend = "Legend1";
             series1.Name = "Series1";
             chartTourism.Series.Add(series1);
-            chartTourism.Size = new Size(875, 588);
+            chartTourism.Size = new Size(875, 657);
             chartTourism.TabIndex = 6;
             chartTourism.Text = "chart1";
             // 
@@ -127,7 +129,7 @@
             // lblMinCountry
             // 
             lblMinCountry.AutoSize = true;
-            lblMinCountry.Location = new Point(798, 765);
+            lblMinCountry.Location = new Point(955, 871);
             lblMinCountry.Name = "lblMinCountry";
             lblMinCountry.Size = new Size(55, 32);
             lblMinCountry.TabIndex = 1;
@@ -137,18 +139,28 @@
             // lblMaxCountry
             // 
             lblMaxCountry.AutoSize = true;
-            lblMaxCountry.Location = new Point(656, 765);
+            lblMaxCountry.Location = new Point(713, 871);
             lblMaxCountry.Name = "lblMaxCountry";
             lblMaxCountry.Size = new Size(58, 32);
             lblMaxCountry.TabIndex = 0;
             lblMaxCountry.Text = "max";
             lblMaxCountry.Click += label1_Click;
             // 
+            // btnAnalyze
+            // 
+            btnAnalyze.Location = new Point(581, 959);
+            btnAnalyze.Name = "btnAnalyze";
+            btnAnalyze.Size = new Size(150, 46);
+            btnAnalyze.TabIndex = 8;
+            btnAnalyze.Text = "Анализ";
+            btnAnalyze.UseVisualStyleBackColor = true;
+            btnAnalyze.Click += btnAnalyze_Click;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1803, 879);
+            ClientSize = new Size(1803, 1076);
             Controls.Add(panel1);
             Margin = new Padding(5);
             Name = "MainForm";
@@ -172,5 +184,6 @@
         private ComboBox cbCountrySelector;
         private System.Windows.Forms.DataVisualization.Charting.Chart chartTourism;
         private Button btnPlotGraph;
+        private Button btnAnalyze;
     }
 }

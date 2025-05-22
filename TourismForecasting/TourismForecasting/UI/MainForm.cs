@@ -99,5 +99,25 @@ namespace TourismForecasting
             chartTourism.Series.Add(series);
             chartTourism.ChartAreas[0].RecalculateAxesScale();
         }
+
+        private void btnAnalyze_Click(object sender, EventArgs e)
+        {
+            var allRecords = TourismManager.GetAllRecords();
+
+            var countrySums = allRecords
+                .GroupBy(r => r.Country)
+                .Select(g => new
+                {
+                    Country = g.Key,
+                    TotalTourists = g.Sum(r => r.Tourists)
+                })
+                .ToList();
+
+            var maxCountry = countrySums.OrderByDescending(c => c.TotalTourists).First();
+            var minCountry = countrySums.OrderBy(c => c.TotalTourists).First();
+
+            lblMaxCountry.Text = $"Макс: {maxCountry.Country} ({maxCountry.TotalTourists:N0})";
+            lblMinCountry.Text = $"Мин: {minCountry.Country} ({minCountry.TotalTourists:N0})";
+        }
     }
 }
