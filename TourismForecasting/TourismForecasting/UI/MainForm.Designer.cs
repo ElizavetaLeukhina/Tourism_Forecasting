@@ -32,22 +32,22 @@
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             panel1 = new Panel();
+            chartTourism = new System.Windows.Forms.DataVisualization.Charting.Chart();
             dgvTourismData = new DataGridView();
             cbCountrySelector = new ComboBox();
             btnLoadData = new Button();
             label3 = new Label();
             lblMinCountry = new Label();
             lblMaxCountry = new Label();
-            chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)chartTourism).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvTourismData).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)chart1).BeginInit();
             SuspendLayout();
             // 
             // panel1
             // 
             panel1.BackColor = Color.Olive;
-            panel1.Controls.Add(chart1);
+            panel1.Controls.Add(chartTourism);
             panel1.Controls.Add(dgvTourismData);
             panel1.Controls.Add(cbCountrySelector);
             panel1.Controls.Add(btnLoadData);
@@ -58,6 +58,22 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(1829, 897);
             panel1.TabIndex = 0;
+            // 
+            // chartTourism
+            // 
+            chartArea1.Name = "ChartArea1";
+            chartTourism.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            chartTourism.Legends.Add(legend1);
+            chartTourism.Location = new Point(64, 225);
+            chartTourism.Name = "chartTourism";
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            chartTourism.Series.Add(series1);
+            chartTourism.Size = new Size(600, 600);
+            chartTourism.TabIndex = 6;
+            chartTourism.Text = "chart1";
             // 
             // dgvTourismData
             // 
@@ -84,6 +100,7 @@
             btnLoadData.TabIndex = 3;
             btnLoadData.Text = "Загрузить данные";
             btnLoadData.UseVisualStyleBackColor = true;
+            btnLoadData.Click += btnLoadData_Click;
             // 
             // label3
             // 
@@ -115,22 +132,6 @@
             lblMaxCountry.Text = "max";
             lblMaxCountry.Click += label1_Click;
             // 
-            // chart1
-            // 
-            chartArea1.Name = "ChartArea1";
-            chart1.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            chart1.Legends.Add(legend1);
-            chart1.Location = new Point(64, 225);
-            chart1.Name = "chart1";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            chart1.Series.Add(series1);
-            chart1.Size = new Size(600, 600);
-            chart1.TabIndex = 6;
-            chart1.Text = "chart1";
-            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
@@ -143,8 +144,8 @@
             Load += Form1_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)chartTourism).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgvTourismData).EndInit();
-            ((System.ComponentModel.ISupportInitialize)chart1).EndInit();
             ResumeLayout(false);
         }
 
@@ -157,6 +158,6 @@
         private Button btnLoadData;
         private DataGridView dgvTourismData;
         private ComboBox cbCountrySelector;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chartTourism;
     }
 }

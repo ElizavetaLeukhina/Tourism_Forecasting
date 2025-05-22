@@ -1,5 +1,10 @@
 using System.Windows.Forms.DataVisualization.Charting;
-
+using System;
+using System.IO;
+using System.Linq;
+using System.Windows.Forms;
+using TourismForecastingApp.Core.Services;
+using TourismForecastingApp.Core.Models;
 namespace TourismForecasting
 {
     public partial class MainForm : Form
@@ -7,7 +12,7 @@ namespace TourismForecasting
         public MainForm()
         {
             InitializeComponent();
-            
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -28,6 +33,39 @@ namespace TourismForecasting
         private void label3_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnLoadData_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                Filter = "JSON файлы (*.json)|*.json",
+                Title = "Выберите файл с туристическими данными"
+            };
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    // Загружаем данные
+                    TourismManager.Initialize(openFileDialog.FileName);
+
+                    // Обновляем ComboBox странами
+                    var countries = TourismManager.GetAvailableCountries();
+                    cbCountrySelector.Items.Clear();
+                    cbCountrySelector.Items.AddRange(countries.ToArray());
+
+                    if (countries.Count > 0)
+                        cbCountrySelector.SelectedIndex = 0;
+
+                    // Показываем все данные в таблице
+                    dgvTourismData.DataSource = TourismManager.GetAllRecords();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Ошибка при загрузке данных: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
     }
 }
