@@ -105,8 +105,8 @@ namespace TourismForecasting
             var max = TourismManager.GetCountryWithMaxTourists();
             var min = TourismManager.GetCountryWithMinTourists();
 
-            lblMaxCountry.Text = $"Макс: {max.Country} — {max.TotalTourists:N0} чел.";
-            lblMinCountry.Text = $"Мин: {min.Country} — {min.TotalTourists:N0} чел.";
+            lblMaxCountry.Text = $"Максимум: {max.Country} — {max.TotalTourists:N0} чел.";
+            lblMinCountry.Text = $"Минимум: {min.Country} — {min.TotalTourists:N0} чел.";
         }
 
         private void BtnForecast_Click(object sender, EventArgs e)
