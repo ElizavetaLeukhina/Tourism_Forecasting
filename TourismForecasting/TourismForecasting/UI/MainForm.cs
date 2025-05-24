@@ -102,22 +102,72 @@ namespace TourismForecasting
 
         private void btnAnalyze_Click(object sender, EventArgs e)
         {
-            var allRecords = TourismManager.GetAllRecords();
+            var max = TourismManager.GetCountryWithMaxTourists();
+            var min = TourismManager.GetCountryWithMinTourists();
 
-            var countrySums = allRecords
-                .GroupBy(r => r.Country)
-                .Select(g => new
+            lblMaxCountry.Text = $"Максимум: {max.Country} — {max.TotalTourists:N0} чел.";
+            lblMinCountry.Text = $"Минимум: {min.Country} — {min.TotalTourists:N0} чел.";
+        }
+
+        private void BtnForecast_Click(object sender, EventArgs e)
+        {
+            if (cbCountrySelector.SelectedItem == null)
+            {
+                MessageBox.Show("Пожалуйста, выберите страну.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (!int.TryParse(txtYearsToForecast.Text, out int forecastYears) || forecastYears <= 0)
+            {
+                MessageBox.Show("Введите корректное количество лет для прогноза.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            string country = cbCountrySelector.SelectedItem.ToString();
+
+            // Получаем ИСХОДНЫЕ исторические данные (чисто реальные)
+            var historicalOriginal = TourismManager.GetRecordsByCountry(country)
+                .Select(r => new TourismRecord
                 {
-                    Country = g.Key,
-                    TotalTourists = g.Sum(r => r.Tourists)
+                    Country = r.Country,
+                    Year = r.Year,
+                    Tourists = r.Tourists
                 })
                 .ToList();
 
-            var maxCountry = countrySums.OrderByDescending(c => c.TotalTourists).First();
-            var minCountry = countrySums.OrderBy(c => c.TotalTourists).First();
+            // Получаем прогноз на основе КОПИИ
+            var forecast = TourismManager.ForecastByMovingAverage(country, forecastYears);
 
-            lblMaxCountry.Text = $"Макс: {maxCountry.Country} ({maxCountry.TotalTourists:N0})";
-            lblMinCountry.Text = $"Мин: {minCountry.Country} ({minCountry.TotalTourists:N0})";
+            // Очищаем график
+            chartTourism.Series.Clear();
+
+            // История — синяя линия
+            var seriesHistorical = new System.Windows.Forms.DataVisualization.Charting.Series("История")
+            {
+                ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line,
+                Color = Color.Blue,
+                BorderWidth = 2
+            };
+
+            foreach (var record in historicalOriginal)
+                seriesHistorical.Points.AddXY(record.Year, record.Tourists);
+
+            // Прогноз — красная линия
+            var seriesForecast = new System.Windows.Forms.DataVisualization.Charting.Series("Прогноз")
+            {
+                ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line,
+                Color = Color.Red,
+                BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash,
+                BorderWidth = 2
+            };
+
+            foreach (var record in forecast)
+                seriesForecast.Points.AddXY(record.Year, record.Tourists);
+
+            // Добавляем серии
+            chartTourism.Series.Add(seriesHistorical);
+            chartTourism.Series.Add(seriesForecast);
         }
+
     }
 }
